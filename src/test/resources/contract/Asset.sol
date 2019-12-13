@@ -193,11 +193,31 @@ contract Asset {
     }
     function payoff(string pay_fac,string get_fac,uint money)public returns(string){
         for(uint i=0;i<pos;i++){
+            if(pay_fac==renter[i].borrower&&get_fac==renter[i].borrower){
                 rent[i].mount-=money;
                 transfer(pay_fac,get_fac,money);
-                emit PayEvent(pay_fac, get_fac, money);
-                return "pay successful";
-        
+                uint len1=rent[get_fac].length;
+                uint len2=borrow[pay_fac].length;
+                for(uint j=0;j<len1;j++){
+                    if(rent[get_fac][j].borrower==pay_fac){
+                    int now_money=rent[get_fac][j].mount;
+                    if(money>now_money){
+                        return "too many money";
+                    }
+                    else{
+                        rent[get_fac][j].mount-=money;
+                        for(uint k=0;k<len2;k++){
+                            if(borrow[pay_fac][k].renter==get_fac){
+                                borrow[pay_fac][k].mount-=money;
+                                return "pay successful";
+                            }
+                        }
+                    }
+                }
+            }
+            emit PayEvent(pay_fac, get_fac, money);
+            return "pay successful";
+            }
         }
         return "pay failed";
     }

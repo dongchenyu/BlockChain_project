@@ -129,27 +129,6 @@ public class Stage3 {
 			System.out.println("failed");
 		}
 	}
-
-	public void transferAsset(String fromAssetAccount, String toAssetAccount, BigInteger amount) {
-		try {
-			String contractAddress = loadAssetAddr();
-			Asset asset = Asset.load(contractAddress, web3j, credentials, new StaticGasProvider(gasPrice, gasLimit));
-			TransactionReceipt receipt = asset.transfer(fromAssetAccount, toAssetAccount, amount).send();
-			List<TransferEventEventResponse> response = asset.getTransferEventEvents(receipt);
-			if (!response.isEmpty()) {
-				if (response.get(0).ret.compareTo(new BigInteger("0")) == 0) {
-					System.out.println(" transfer success => from_asset: %s, to_asset: %s, amount: %s ",
-							fromAssetAccount, toAssetAccount, amount);
-				} else {
-					System.out.println(" transfer asset account failed, ret code is %s ");
-				}
-			}
-		} 
-		catch (Exception e) {
-			System.out.println("failed");
-		}
-	}
-
 	public void loanAsset(String fromAssetAccount, String toAssetAccount, BigInteger amount) {
 		try {
 			String contractAddress = loadAssetAddr();
@@ -185,6 +164,7 @@ public class Stage3 {
 			} else {
 				System.out.println(" event log not found, maybe transaction not exec. ");
 			}
+			
 		} 
 		catch (Exception e) {
 			System.out.println("failed");
