@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title></title> 
+<style>
+.list{
+    display: inline-block;
+    width:150px;
+    height:80px;
+    font-size:32px;
+    padding: 10px 20px;
+}
+.text{
+    display: inline-block;
+    width:160px;
+    height:80px;
+    font-size:32px;
+}
+.text1{
+    display: inline-block;
+    width:160px;
+    height:80px;
+    font-size:32px;
+}
+.button{
+    display: inline-block;
+    width:160px;
+    height:80px;
+    font-size:32px;
+    border: 2px solid #000000;
+}
+</style>
+</head>
+<body>
+<br>
+<p class="text" style="margin-left:550px;margin-top:50px">接受人</p>
+<input type="text" style="height:50px;width:350px;font-size:32px" id="receiver">
+<p class="text" style="margin-left:550px;margin-top:50px">合约债务人</p>
+<input type="text" style="height:50px;width:350px;font-size:32px" id="money">
+<p class="text" style="margin-left:550px;margin-top:50px">转让金额</p>
+<input type="text" style="height:50px;width:350px;font-size:32px" id="reason">
+<script>
+function test(){
+    window.alert("转让成功");
+}
+</script>
+
+<br>
+<button class="button" style="margin-left:700px;margin-top:50px" onclick="test()">确认转让</button>
+</body>
+</html>
